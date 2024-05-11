@@ -46,7 +46,7 @@ Shader "Custom/Metallic_Shader"
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
-            }
+            
         }
         ENDCG
     }
