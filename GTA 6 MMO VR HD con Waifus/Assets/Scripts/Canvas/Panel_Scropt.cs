@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Panel_Scropt : MonoBehaviour
 {
+    //script reused from older projects (hipercasuals)
+
     private void Start()
     {
         Time.timeScale = 0;

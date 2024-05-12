@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IKFootSolver : MonoBehaviour
 {
+    //script recovered from VR previous asigments
+
     public bool isMovingForward;
 
     [SerializeField] LayerMask terrainLayer = default;

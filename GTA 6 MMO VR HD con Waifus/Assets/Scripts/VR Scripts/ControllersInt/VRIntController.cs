@@ -7,6 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class VRIntController : MonoBehaviour
 {
+    //script recovered from VR assigments
+
     float sliderValue;
     XRSlider xRSlider;
     public GameObject key;
