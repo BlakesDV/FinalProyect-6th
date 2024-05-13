@@ -11,7 +11,7 @@ public class VRIntController : MonoBehaviour
 
     float sliderValue;
     XRSlider xRSlider;
-    public GameObject key;
+    public GameObject watermelon;
     public GameObject socket;
 
     public GameObject cannonball;
@@ -60,9 +60,9 @@ public class VRIntController : MonoBehaviour
 
     }
 
-    public void KeySpawner()
+    public void WatermelonSpawner()
     {
-        Instantiate(key, transform.position, Quaternion.identity);
+        Instantiate(watermelon, transform.position, Quaternion.identity);
     }
 
     public void LeverOn()
