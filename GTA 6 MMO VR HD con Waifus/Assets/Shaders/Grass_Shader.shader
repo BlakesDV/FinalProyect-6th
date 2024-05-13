@@ -1,4 +1,4 @@
-Shader "Custom/Pine_Shader"
+Shader "Custom/Grass_Shader"
 {
     Properties
     {

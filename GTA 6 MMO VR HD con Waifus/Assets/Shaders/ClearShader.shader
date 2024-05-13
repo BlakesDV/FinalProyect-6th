@@ -1,38 +1,41 @@
 Shader "Custom/ClearShader"
 {
-    Properties
-    {
-        _Color("Color", Color) = (1,1,1,1)
-        _Metallic("Metallic", Range(0,1)) = 1
-        _Glossiness("Smoothness", Range(0,1)) = 0.5
+      Properties {
+        _MainTex ("Texture", 2D) = "white" {}
+        _Glossiness ("Glossiness", Range(0,1)) = 0.5
+        _Refraction ("Refraction", Range(0,1)) = 0.5
+        _Alpha ("Alpha", Range(0,1)) = 0.5
     }
-        SubShader
-    {
-        Tags { "RenderType" = "Opaque" }
+    SubShader {
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
         LOD 200
 
-        CGPROGRAM
-        #pragma surface surf Standard fullforwardshadows
+        Blend SrcAlpha OneMinusSrcAlpha
 
-        struct Input
-        {
+        CGPROGRAM
+        #pragma surface surf Standard alpha:fade
+
+        struct Input {
             float2 uv_MainTex;
-            float3 viewDir;
         };
 
-        float4 _Color;
-        float _Metallic;
-        float _Glossiness;
+        sampler2D _MainTex;
+        half _Glossiness;
+        half _Refraction;
+        half _Alpha;
 
-        void surf(Input IN, inout SurfaceOutputStandard o)
-        {
-            o.Albedo = _Color.rgb;
-            o.Metallic = _Metallic;
+        void surf (Input IN, inout SurfaceOutputStandard o) {
+            // Albedo
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
+            o.Albedo = c.rgb;
+
+            // Smoothness
             o.Smoothness = _Glossiness;
-            o.Normal = normalize(o.Normal);
-            o.Alpha = max(0, dot(IN.viewDir, o.Normal));
+
+            // Refraction
+            o.Alpha = _Alpha * _Refraction;
         }
         ENDCG
     }
-        FallBack "Diffuse"
+    FallBack "Transparent/Diffuse"
 }
