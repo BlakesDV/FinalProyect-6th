@@ -54,8 +54,6 @@ public class Panel_Scropt : MonoBehaviour
     public void Salir()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
-        Debug.Log("Salir");
     }
 
 }
