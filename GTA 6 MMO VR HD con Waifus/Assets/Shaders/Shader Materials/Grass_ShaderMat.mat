@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CarShader_Mat
-  m_Shader: {fileID: 4800000, guid: 35ae120b0b6b40d4da04461a8d9646b6, type: 3}
+  m_Name: Grass_ShaderMat
+  m_Shader: {fileID: 4800000, guid: 64713173bdaa2ab479afd5636ab58da1, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -20,18 +20,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 911bf26cce8064a4bacdee1f2c7221d8, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ebeffa5e8b7a99343a7d572f63b5f952, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glossiness: 0.73
-    - _Metallic: 1
+    - _Amplitude: 0.31
+    - _Exponent: 5.12
+    - _Frequency: 3.85
+    - _Glossiness: 0.493
+    - _Metallic: 0
+    - _Speed: 0.235
+    - _WindSpeed: 0.288
     m_Colors:
-    - _Color: {r: 0, g: 0.43849897, b: 1, a: 1}
+    - _Color: {r: 0.34505627, g: 0.8584906, b: 0.20652366, a: 1}
+    - _Color1: {r: 0.32941177, g: 0.4666667, b: 0.20392159, a: 1}
+    - _Color2: {r: 0.25987896, g: 0.754717, b: 0.33318824, a: 1}
+    - _Color3: {r: 0.07499109, g: 0.41509432, b: 0.03720184, a: 1}
   m_BuildTextureStacks: []

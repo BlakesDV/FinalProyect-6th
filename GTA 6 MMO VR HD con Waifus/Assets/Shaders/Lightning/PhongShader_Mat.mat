@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CarShader_Mat
-  m_Shader: {fileID: 4800000, guid: 35ae120b0b6b40d4da04461a8d9646b6, type: 3}
+  m_Name: PhongShader_Mat
+  m_Shader: {fileID: 4800000, guid: 18413e9a63af2a74fa674c6be7d093e9, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -20,18 +20,15 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 911bf26cce8064a4bacdee1f2c7221d8, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ebeffa5e8b7a99343a7d572f63b5f952, type: 3}
+    - _Bump:
+        m_Texture: {fileID: 2800000, guid: e3cd75e872885ca49a1d5c2cd0ec7ac7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glossiness: 0.73
-    - _Metallic: 1
+    - _Gloss: 0.613
+    - _Spec: 0.476
     m_Colors:
-    - _Color: {r: 0, g: 0.43849897, b: 1, a: 1}
+    - _Color: {r: 0.18039216, g: 0.534224, b: 0.972549, a: 1}
+    - _SpecularColor: {r: 1, g: 0.16509432, b: 0.529135, a: 1}
   m_BuildTextureStacks: []

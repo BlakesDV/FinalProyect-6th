@@ -6,6 +6,7 @@ Shader "Custom/CarShader"
         _MainTex("Albedo (RGB)", 2D) = "white" {}
         _Glossiness("Smoothness", Range(0,1)) = 0.5
         _Metallic("Metallic", Range(0,1)) = 0.0
+        _BumpMap("Bump Map", 2D) = "bump" {}
     }
         SubShader
         {
@@ -20,10 +21,12 @@ Shader "Custom/CarShader"
             #pragma target 3.0
 
             sampler2D _MainTex;
+            sampler2D _BumpMap;
 
             struct Input
             {
                 float2 uv_MainTex;
+                float2 uv_BumpMap;
             };
 
             half _Glossiness;
@@ -34,6 +37,9 @@ Shader "Custom/CarShader"
             {
                 // Albedo comes from a texture tinted by color
                 fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+                float height = tex2D(_BumpMap, IN.uv_BumpMap).r;
+                float3 normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
+                o.Normal = normal;
                 //o.Albedo = c.rgb;
                 // Metallic and smoothness come from slider variables
                 //o.Metallic = _Metallic;
