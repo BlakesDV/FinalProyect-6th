@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,34 +13,28 @@ public class VRIntController : MonoBehaviour
 
     float sliderValue;
     XRSlider xRSlider;
-    public GameObject watermelonBP;
-    public GameObject watermelonLP;
-    public GameObject socketBP;
-    public GameObject socketLP;
-    public GameObject socket;
-
-    //public GameObject cannonball;
-    //public Transform cannonPos;
-    //public Rigidbody cannon;
-    //public float cannonballSpeed = 10f;
-    XRSocketInteractor sx;
-
-    public XRBaseInteractable[] buttons;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable buttonGrip;
+    private bool buttonActive = false;
     private int activeButtonCount = 0;
+    public GameObject socket;
+    XRSocketInteractor sx; 
+    public GameObject watermelonPrefab;
+
+   
+
 
     void Start()
     {
         xRSlider = GetComponent<XRSlider>();
         sx = GetComponent<XRSocketInteractor>();
+        buttonGrip = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRBaseInteractable>();
+        buttonGrip.selectEntered.AddListener(ButtonActivator);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (activeButtonCount == buttons.Length)
-        {
-            WatermelonSpawner();
-        }
     }
 
     public void MovX()
@@ -54,8 +49,6 @@ public class VRIntController : MonoBehaviour
 
     public void TriggerEnter()
     {
-        //Instantiate(cannonball, cannonPos.position, Quaternion.identity);
-
         IXRSelectInteractable x = sx.GetOldestInteractableSelected();
         Destroy(x.transform.gameObject);
     }
@@ -68,21 +61,21 @@ public class VRIntController : MonoBehaviour
     public void ButtonPress()
     {
         Debug.Log("Button Pressed");
-        activeButtonCount++;
-        if (activeButtonCount >= buttons.Length)
-        {
-            WatermelonSpawner();
-        }
     }
 
-
-    public void WatermelonSpawner()
+    //activate and deactivate buttons
+    private void ButtonActivator(SelectEnterEventArgs args)
     {
-        GameObject watermelonInstance = Instantiate(watermelonBP, transform.position, Quaternion.identity);
-        watermelonInstance.SetActive(true);
+        buttonActive = !buttonActive;
+        watermelonPrefab.SetActive(buttonActive);
+
+    }
+    public void WatermelonSpawnerFunction()
+    {
+        Instantiate(watermelonPrefab, socket.transform.position, Quaternion.identity);
     }
 
-public void LeverOn()
+    public void LeverOn()
     {
         socket.SetActive(false);
     }
