@@ -8,6 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamePlay.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/AssetsScenes/Scenes/Low Poly City Mega Pack Free.unity
+    guid: 06db8b40c9740a44ea32f0266002716d
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 824055aa7b6e868488b558251faf2afa, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0506d2750e86e6a49a8b7bb44115545e, type: 2}
