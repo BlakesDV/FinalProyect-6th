@@ -8,16 +8,15 @@ using UnityEngine;
 public class AgresivoTerritorial : BasicAgent
 {
 
-    [SerializeField] float eyesPerceptRadious, earsPerceptRadious;
-    [SerializeField] Transform eyesPercept, earsPercept;
     [SerializeField] Animator animator;
     [SerializeField] AgressiveAgentStates agentState;
+    [SerializeField]
+    Transform eyesPercept;
     Rigidbody rb;
-    Collider[] perceibed, perceibed2;
+    [SerializeField] Collider[] perceibed;
     string currentAnimationStateName;
-    bool insideCollider = false;
-    public GameObject boxCollider;
-
+    [SerializeField] bool insideCollider = false;
+    [SerializeField] Vector3 cubeSize;
 
 
     void Start()
@@ -35,8 +34,7 @@ public class AgresivoTerritorial : BasicAgent
 
     private void FixedUpdate()
     {
-        perceibed = Physics.OverlapSphere(eyesPercept.position, eyesPerceptRadious);
-        perceibed2 = Physics.OverlapSphere(earsPercept.position, earsPerceptRadious);
+        perceibed = Physics.OverlapBox(eyesPercept.position, cubeSize * .5f);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -47,37 +45,26 @@ public class AgresivoTerritorial : BasicAgent
     {
         //if usuario en box
         target = null;
-        if (collision.gameObject.tag == "Player" && gameObject.name == "Velociraptor Terrain")
+        if (perceibed != null)
         {
-
-            if (perceibed != null)
+            foreach (Collider tmp in perceibed)
             {
-                foreach (Collider tmp in perceibed)
+                if (tmp.CompareTag("Player"))
                 {
-                    if (tmp.CompareTag("Player"))
-                    {
-                        target = tmp.transform;
-                    }
-                }
-            }
-            if (perceibed2 != null)
-            {
-                foreach (Collider tmp in perceibed2)
-                {
-                    if (tmp.CompareTag("Player"))
-                    {
-                        target = tmp.transform;
-                    }
+                    target = tmp.transform;
+                    insideCollider = true;
                 }
             }
         }
     }
+
 
     void decisionManager()
     {
         AgressiveAgentStates newState;
         if (target == null)
         {
+            insideCollider = false;
             newState = AgressiveAgentStates.Wander;
         }
         else if (insideCollider)
@@ -193,10 +180,8 @@ public class AgresivoTerritorial : BasicAgent
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(eyesPercept.position, eyesPerceptRadious);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(earsPercept.position, earsPerceptRadious);
+        Gizmos.DrawWireCube(eyesPercept.position, cubeSize);
     }
 
     private enum AgressiveAgentStates
