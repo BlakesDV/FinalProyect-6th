@@ -16,7 +16,7 @@ public class AgresivoTerritorial : BasicAgent
     Collider[] perceibed, perceibed2;
     string currentAnimationStateName;
     bool insideCollider = false;
-    GameObject boxCollider;
+    public GameObject boxCollider;
 
 
 
@@ -30,7 +30,6 @@ public class AgresivoTerritorial : BasicAgent
 
     void Update()
     {
-        perceptionManager();
         decisionManager();
     }
 
@@ -39,19 +38,23 @@ public class AgresivoTerritorial : BasicAgent
         perceibed = Physics.OverlapSphere(eyesPercept.position, eyesPerceptRadious);
         perceibed2 = Physics.OverlapSphere(earsPercept.position, earsPerceptRadious);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        perceptionManager(collision);
+    }
 
-    void perceptionManager()
+    void perceptionManager(Collision collision)
     {
         //if usuario en box
         target = null;
-        if (target != null && target.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player" && gameObject.name == "Velociraptor Terrain")
         {
 
             if (perceibed != null)
             {
                 foreach (Collider tmp in perceibed)
                 {
-                    if (tmp.CompareTag("Enemy"))
+                    if (tmp.CompareTag("Player"))
                     {
                         target = tmp.transform;
                     }
@@ -61,7 +64,7 @@ public class AgresivoTerritorial : BasicAgent
             {
                 foreach (Collider tmp in perceibed2)
                 {
-                    if (tmp.CompareTag("Enemy"))
+                    if (tmp.CompareTag("Player"))
                     {
                         target = tmp.transform;
                     }
@@ -147,11 +150,11 @@ public class AgresivoTerritorial : BasicAgent
 
     private void wandering()
     {
-        if (!currentAnimationStateName.Equals("walksent"))
+        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_SniffGround_Anim"))
         {
             Debug.Log(currentAnimationStateName);
-            animator.Play("walksent", 0);
-            currentAnimationStateName = "walksent";
+            animator.Play("RaptorArmature|Raptor_SniffGround_Anim", 0);
+            currentAnimationStateName = "RaptorArmature|Raptor_SniffGround_Anim";
         }
         if ((wanderNextPosition == null) ||
             (Vector3.Distance(transform.position, wanderNextPosition.Value) < 0.5f))
@@ -163,20 +166,20 @@ public class AgresivoTerritorial : BasicAgent
 
     private void pursuiting()
     {
-        if (!currentAnimationStateName.Equals("run") && !currentAnimationStateName.Equals("walk"))
+        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim") && !currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
         {
-            animator.Play("run", 0);
-            currentAnimationStateName = "run";
+            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
+            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
         }
         maxVel *= 2;
         rb.velocity = SteeringBehaviours.seek(this, target.position);
         rb.velocity = SteeringBehaviours.arrival(this, target.position, slowingRadius, stopThreshold);
         if (Vector3.Distance(transform.position, target.position) <= slowingRadius)
         {
-            if (!currentAnimationStateName.Equals("walk"))
+            if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
             {
-                animator.Play("walk", 0);
-                currentAnimationStateName = "walk";
+                animator.Play("RaptorArmature|Raptor_Walk_Anim", 0);
+                currentAnimationStateName = "RaptorArmature|Raptor_Walk_Anim";
             }
         }
         maxVel /= 2;
@@ -184,19 +187,19 @@ public class AgresivoTerritorial : BasicAgent
 
     private void attacking()
     {
-        if (!currentAnimationStateName.Equals("attack"))
+        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Bite1_Anim"))
         {
-            animator.Play("attack", 0);
-            currentAnimationStateName = "attack";
+            animator.Play("RaptorArmature|Raptor_Bite1_Anim", 0);
+            currentAnimationStateName = "RaptorArmature|Raptor_Bite1_Anim";
         }
     }
 
     private void escaping()
     {
-        if (!currentAnimationStateName.Equals("run"))
+        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim"))
         {
-            animator.Play("run", 0);
-            currentAnimationStateName = "run";
+            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
+            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
         }
         rb.velocity = SteeringBehaviours.flee(this, target.position);
     }
