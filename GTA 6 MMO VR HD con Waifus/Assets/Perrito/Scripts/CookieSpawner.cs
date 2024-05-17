@@ -35,4 +35,11 @@ public class CookieSpawner : MonoBehaviour
         canSpawnCookie = false;
 
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Acompañante"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
