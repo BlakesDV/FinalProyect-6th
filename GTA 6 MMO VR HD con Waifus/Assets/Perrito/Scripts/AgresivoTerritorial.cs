@@ -30,18 +30,15 @@ public class AgresivoTerritorial : BasicAgent
     void Update()
     {
         decisionManager();
+        perceptionManager();
     }
 
     private void FixedUpdate()
     {
         perceibed = Physics.OverlapBox(eyesPercept.position, cubeSize * .5f);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        perceptionManager(collision);
-    }
 
-    void perceptionManager(Collision collision)
+    void perceptionManager()
     {
         //if usuario en box
         target = null;
