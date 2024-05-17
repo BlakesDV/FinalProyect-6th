@@ -42,7 +42,7 @@ public class Acompañante : BasicAgent
         {
             foreach (Collider tmp in perceibed)
             {
-                if (tmp.CompareTag("Enemy"))
+                if (tmp.CompareTag("Acompañante"))
                 {
                     target = tmp.transform;
                 }
@@ -52,7 +52,7 @@ public class Acompañante : BasicAgent
         {
             foreach (Collider tmp in perceibed2)
             {
-                if (tmp.CompareTag("Enemy"))
+                if (tmp.CompareTag("Acompañante"))
                 {
                     target = tmp.transform;
                 }
@@ -72,15 +72,14 @@ public class Acompañante : BasicAgent
             newState = AgressiveAgentStates.Pursuit;
             if (Vector3.Distance(transform.position, target.position) < stopThreshold)
             {
-                newState = AgressiveAgentStates.Attack;
+                newState = AgressiveAgentStates.None;
             }
         }
         else
         {
-            newState = AgressiveAgentStates.Escape;
+            newState = AgressiveAgentStates.None;
         }
         changeAgentState(newState);
-        actionManager();
         movementManager();
     }
 
@@ -98,21 +97,6 @@ public class Acompañante : BasicAgent
         }
     }
 
-    void actionManager()
-    {
-        switch (agentState)
-        {
-            case AgressiveAgentStates.None:
-                break;
-            case AgressiveAgentStates.Attack:
-                // biting();
-                break;
-            case AgressiveAgentStates.Escape:
-                // screaming();
-                break;
-        }
-    }
-
     void movementManager()
     {
         switch (agentState)
@@ -122,12 +106,6 @@ public class Acompañante : BasicAgent
                 break;
             case AgressiveAgentStates.Pursuit:
                 pursuiting();
-                break;
-            case AgressiveAgentStates.Attack:
-                attacking();
-                break;
-            case AgressiveAgentStates.Escape:
-                escaping();
                 break;
             case AgressiveAgentStates.Wander:
                 wandering();
@@ -172,25 +150,6 @@ public class Acompañante : BasicAgent
         maxVel /= 2;
     }
 
-    private void attacking()
-    {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Bite1_Anim"))
-        {
-            animator.Play("RaptorArmature|Raptor_Bite1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Bite1_Anim";
-        }
-    }
-
-    private void escaping()
-    {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim"))
-        {
-            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
-        }
-        rb.velocity = SteeringBehaviours.flee(this, target.position);
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -203,8 +162,6 @@ public class Acompañante : BasicAgent
     {
         None,
         Pursuit,
-        Attack,
-        Escape,
         Wander
     }
 }
