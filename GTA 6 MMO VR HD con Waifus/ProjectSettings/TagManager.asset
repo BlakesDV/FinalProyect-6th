@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - DestroyThis
   - Watermelon
+  - "Agrupaci\xF3n"
+  - "Acompa\xF1ante"
   layers:
   - Default
   - TransparentFX

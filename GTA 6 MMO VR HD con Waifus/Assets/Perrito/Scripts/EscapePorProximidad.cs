@@ -127,11 +127,11 @@ public class EscapePorProximidad : BasicAgent
 
     private void wandering()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_SniffGround_Anim"))
+        if (!currentAnimationStateName.Equals("SniffGround"))
         {
             Debug.Log(currentAnimationStateName);
-            animator.Play("RaptorArmature|Raptor_SniffGround_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_SniffGround_Anim";
+            animator.Play("SniffGround", 0);
+            currentAnimationStateName = "SniffGround";
         }
         if ((wanderNextPosition == null) ||
             (Vector3.Distance(transform.position, wanderNextPosition.Value) < 0.5f))
@@ -143,10 +143,10 @@ public class EscapePorProximidad : BasicAgent
 
     private void escaping()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim"))
+        if (!currentAnimationStateName.Equals("Run"))
         {
-            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
+            animator.Play("Run", 0);
+            currentAnimationStateName = "Run";
         }
         rb.velocity = SteeringBehaviours.flee(this, target.position);
     }

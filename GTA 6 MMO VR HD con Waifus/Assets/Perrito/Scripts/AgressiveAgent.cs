@@ -40,14 +40,14 @@ public class AgressiveAgent : BasicAgent {
         target = null;
         if (perceibed != null) {
             foreach (Collider tmp in perceibed) {
-                if (tmp.CompareTag("Enemy")) {
+                if (tmp.CompareTag("Player")) {
                     target = tmp.transform;
                 }
             }
         }
         if (perceibed2 != null) {
             foreach (Collider tmp in perceibed2) {
-                if (tmp.CompareTag("Enemy")) {
+                if (tmp.CompareTag("Player")) {
                     target = tmp.transform;
                 }
             }

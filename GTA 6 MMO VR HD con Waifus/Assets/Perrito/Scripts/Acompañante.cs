@@ -13,7 +13,7 @@ public class Acompañante : BasicAgent
     Rigidbody rb;
     Collider[] perceibed, perceibed2;
     string currentAnimationStateName;
-
+    bool comida = false;
 
     void Start()
     {
@@ -25,7 +25,10 @@ public class Acompañante : BasicAgent
 
     void Update()
     {
-        perceptionManager();
+        if (comida)
+        {
+            perceptionManager();
+        }
         decisionManager();
     }
 
@@ -42,7 +45,7 @@ public class Acompañante : BasicAgent
         {
             foreach (Collider tmp in perceibed)
             {
-                if (tmp.CompareTag("Acompañante"))
+                if (tmp.CompareTag("Player"))
                 {
                     target = tmp.transform;
                 }
@@ -52,7 +55,7 @@ public class Acompañante : BasicAgent
         {
             foreach (Collider tmp in perceibed2)
             {
-                if (tmp.CompareTag("Acompañante"))
+                if (tmp.CompareTag("Player"))
                 {
                     target = tmp.transform;
                 }
@@ -115,11 +118,11 @@ public class Acompañante : BasicAgent
 
     private void wandering()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_SniffGround_Anim"))
+        if (!currentAnimationStateName.Equals("SniffGround"))
         {
             Debug.Log(currentAnimationStateName);
-            animator.Play("RaptorArmature|Raptor_SniffGround_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_SniffGround_Anim";
+            animator.Play("SniffGround", 0);
+            currentAnimationStateName = "SniffGround";
         }
         if ((wanderNextPosition == null) ||
             (Vector3.Distance(transform.position, wanderNextPosition.Value) < 0.5f))
@@ -131,20 +134,20 @@ public class Acompañante : BasicAgent
 
     private void pursuiting()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim") && !currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
+        if (!currentAnimationStateName.Equals("Run") && !currentAnimationStateName.Equals("Walk"))
         {
-            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
+            animator.Play("Run", 0);
+            currentAnimationStateName = "Run";
         }
         maxVel *= 2;
         rb.velocity = SteeringBehaviours.seek(this, target.position);
         rb.velocity = SteeringBehaviours.arrival(this, target.position, slowingRadius, stopThreshold);
         if (Vector3.Distance(transform.position, target.position) <= slowingRadius)
         {
-            if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
+            if (!currentAnimationStateName.Equals("Walk"))
             {
-                animator.Play("RaptorArmature|Raptor_Walk_Anim", 0);
-                currentAnimationStateName = "RaptorArmature|Raptor_Walk_Anim";
+                animator.Play("Walk", 0);
+                currentAnimationStateName = "Walk";
             }
         }
         maxVel /= 2;
@@ -164,4 +167,13 @@ public class Acompañante : BasicAgent
         Pursuit,
         Wander
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("comida"))
+        {
+            comida = true;
+        }
+    }
+
 }

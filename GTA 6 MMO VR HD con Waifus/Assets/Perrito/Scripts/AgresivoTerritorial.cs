@@ -150,11 +150,11 @@ public class AgresivoTerritorial : BasicAgent
 
     private void wandering()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_SniffGround_Anim"))
+        if (!currentAnimationStateName.Equals("SniffGround"))
         {
             Debug.Log(currentAnimationStateName);
-            animator.Play("RaptorArmature|Raptor_SniffGround_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_SniffGround_Anim";
+            animator.Play("SniffGround", 0);
+            currentAnimationStateName = "SniffGround";
         }
         if ((wanderNextPosition == null) ||
             (Vector3.Distance(transform.position, wanderNextPosition.Value) < 0.5f))
@@ -166,20 +166,20 @@ public class AgresivoTerritorial : BasicAgent
 
     private void pursuiting()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim") && !currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
+        if (!currentAnimationStateName.Equals("Run") && !currentAnimationStateName.Equals("Walk"))
         {
-            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
+            animator.Play("Run", 0);
+            currentAnimationStateName = "Run";
         }
         maxVel *= 2;
         rb.velocity = SteeringBehaviours.seek(this, target.position);
         rb.velocity = SteeringBehaviours.arrival(this, target.position, slowingRadius, stopThreshold);
         if (Vector3.Distance(transform.position, target.position) <= slowingRadius)
         {
-            if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Walk_Anim"))
+            if (!currentAnimationStateName.Equals("Walk"))
             {
-                animator.Play("RaptorArmature|Raptor_Walk_Anim", 0);
-                currentAnimationStateName = "RaptorArmature|Raptor_Walk_Anim";
+                animator.Play("Walk", 0);
+                currentAnimationStateName = "Walk";
             }
         }
         maxVel /= 2;
@@ -187,19 +187,19 @@ public class AgresivoTerritorial : BasicAgent
 
     private void attacking()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Bite1_Anim"))
+        if (!currentAnimationStateName.Equals("Bite"))
         {
-            animator.Play("RaptorArmature|Raptor_Bite1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Bite1_Anim";
+            animator.Play("Bite", 0);
+            currentAnimationStateName = "Bite";
         }
     }
 
     private void escaping()
     {
-        if (!currentAnimationStateName.Equals("RaptorArmature|Raptor_Run1_Anim"))
+        if (!currentAnimationStateName.Equals("Run"))
         {
-            animator.Play("RaptorArmature|Raptor_Run1_Anim", 0);
-            currentAnimationStateName = "RaptorArmature|Raptor_Run1_Anim";
+            animator.Play("Run", 0);
+            currentAnimationStateName = "Run";
         }
         rb.velocity = SteeringBehaviours.flee(this, target.position);
     }
