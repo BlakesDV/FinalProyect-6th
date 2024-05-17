@@ -33,7 +33,7 @@ public class EscapePorProximidad : BasicAgent
         perceibed = Physics.OverlapSphere(eyesPercept.position, eyesPerceptRadious);
         perceibed2 = Physics.OverlapSphere(earsPercept.position, earsPerceptRadious);
     }
-
+    
     void perceptionManager()
     {
         target = null;
@@ -66,20 +66,11 @@ public class EscapePorProximidad : BasicAgent
         {
             newState = AgressiveAgentStates.Wander;
         }
-        else if (target.GetComponent<Rigidbody>().mass < rb.mass)
-        {
-            newState = AgressiveAgentStates.Wander;
-            if (Vector3.Distance(transform.position, target.position) < stopThreshold)
-            {
-                newState = AgressiveAgentStates.Escape;
-            }
-        }
         else
         {
             newState = AgressiveAgentStates.Escape;
         }
         changeAgentState(newState);
-        actionManager();
         movementManager();
     }
 
@@ -94,18 +85,6 @@ public class EscapePorProximidad : BasicAgent
         if (agentState != AgressiveAgentStates.Wander)
         {
             wanderNextPosition = null;
-        }
-    }
-
-    void actionManager()
-    {
-        switch (agentState)
-        {
-            case AgressiveAgentStates.None:
-                break;
-            case AgressiveAgentStates.Escape:
-                // screaming();
-                break;
         }
     }
 
@@ -143,10 +122,10 @@ public class EscapePorProximidad : BasicAgent
 
     private void escaping()
     {
-        if (!currentAnimationStateName.Equals("Run"))
+        if (!currentAnimationStateName.Equals("RunAway"))
         {
-            animator.Play("Run", 0);
-            currentAnimationStateName = "Run";
+            animator.Play("RunAway", 0);
+            currentAnimationStateName = "RunAway";
         }
         rb.velocity = SteeringBehaviours.flee(this, target.position);
     }

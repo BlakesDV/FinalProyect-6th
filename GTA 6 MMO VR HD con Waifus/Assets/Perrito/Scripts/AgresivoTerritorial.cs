@@ -139,9 +139,6 @@ public class AgresivoTerritorial : BasicAgent
             case AgressiveAgentStates.Attack:
                 attacking();
                 break;
-            case AgressiveAgentStates.Escape:
-                escaping();
-                break;
             case AgressiveAgentStates.Wander:
                 wandering();
                 break;
@@ -192,16 +189,6 @@ public class AgresivoTerritorial : BasicAgent
             animator.Play("Bite", 0);
             currentAnimationStateName = "Bite";
         }
-    }
-
-    private void escaping()
-    {
-        if (!currentAnimationStateName.Equals("Run"))
-        {
-            animator.Play("Run", 0);
-            currentAnimationStateName = "Run";
-        }
-        rb.velocity = SteeringBehaviours.flee(this, target.position);
     }
 
     private void OnDrawGizmos()

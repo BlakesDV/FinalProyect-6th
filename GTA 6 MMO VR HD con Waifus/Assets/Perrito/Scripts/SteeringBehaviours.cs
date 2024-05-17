@@ -78,7 +78,9 @@ public class SteeringBehaviours {
         steering /= agentRB.mass;
         steering += agentRB.velocity;
         steering = truncate(steering, agent.getSpeed());
-        steering.y = agentRB.velocity.y;
+        //steering.y = agentRB.velocity.y;
+        float tempY = agent.transform.position.y;
+        steering.y = 0;
         lookAt(agent.transform, steering);
         return steering;
     }

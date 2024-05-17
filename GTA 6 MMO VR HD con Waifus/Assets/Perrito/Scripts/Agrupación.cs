@@ -80,7 +80,6 @@ public class Agrupación : BasicAgent
             newState = AgressiveAgentStates.Escape;
         }
         changeAgentState(newState);
-        actionManager();
         movementManager();
     }
 
@@ -98,21 +97,6 @@ public class Agrupación : BasicAgent
         }
     }
 
-    void actionManager()
-    {
-        switch (agentState)
-        {
-            case AgressiveAgentStates.None:
-                break;
-            case AgressiveAgentStates.Attack:
-                // biting();
-                break;
-            case AgressiveAgentStates.Escape:
-                // screaming();
-                break;
-        }
-    }
-
     void movementManager()
     {
         switch (agentState)
@@ -122,12 +106,6 @@ public class Agrupación : BasicAgent
                 break;
             case AgressiveAgentStates.Pursuit:
                 pursuiting();
-                break;
-            case AgressiveAgentStates.Attack:
-                attacking();
-                break;
-            case AgressiveAgentStates.Escape:
-                escaping();
                 break;
             case AgressiveAgentStates.Wander:
                 wandering();
@@ -170,25 +148,6 @@ public class Agrupación : BasicAgent
             }
         }
         maxVel /= 2;
-    }
-
-    private void attacking()
-    {
-        if (!currentAnimationStateName.Equals("Bite"))
-        {
-            animator.Play("Bite", 0);
-            currentAnimationStateName = "Bite";
-        }
-    }
-
-    private void escaping()
-    {
-        if (!currentAnimationStateName.Equals("Run"))
-        {
-            animator.Play("Run", 0);
-            currentAnimationStateName = "Run";
-        }
-        rb.velocity = SteeringBehaviours.flee(this, target.position);
     }
 
     private void OnDrawGizmos()
