@@ -17790,6 +17790,37 @@ Transform:
   m_Father: {fileID: 1152512065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &798230554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798230555}
+  m_Layer: 0
+  m_Name: CookieSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &798230555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798230554}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.803, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1492744844}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802689888
 GameObject:
   m_ObjectHideFlags: 0
@@ -20197,7 +20228,7 @@ PrefabInstance:
     - target: {fileID: 7263314587025749339, guid: 5020bf0a9158d544e91905f84663dc90, type: 3}
       propertyPath: cookieSpawner
       value: 
-      objectReference: {fileID: 1593824738}
+      objectReference: {fileID: 798230555}
     - target: {fileID: 7263314587421353624, guid: 5020bf0a9158d544e91905f84663dc90, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -35184,6 +35215,11 @@ Transform:
   m_Father: {fileID: 1856043736}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1492744844 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7263314587025749352, guid: 5020bf0a9158d544e91905f84663dc90, type: 3}
+  m_PrefabInstance: {fileID: 910251795}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1498580400
 GameObject:
   m_ObjectHideFlags: 0
@@ -37221,11 +37257,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3b822223d14224eac2537e8d8e17aa, type: 3}
---- !u!4 &1593824738 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8842933259787638887, guid: cd3b822223d14224eac2537e8d8e17aa, type: 3}
-  m_PrefabInstance: {fileID: 1593824737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1597795168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46025,8 +46056,6 @@ GameObject:
   - component: {fileID: 1888795310}
   - component: {fileID: 1888795309}
   - component: {fileID: 1888795308}
-  - component: {fileID: 1888795307}
-  - component: {fileID: 1888795306}
   - component: {fileID: 1888795305}
   m_Layer: 0
   m_Name: Bestieraptor UwU
@@ -46055,56 +46084,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1888795306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888795304}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb087ead7c33f0d4bba4aba833652ffc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  maxVel: 2
-  maxSteerForce: 1.7
-  slowingRadius: 2
-  stopThreshold: 1.7
-  wanderDisplacement: 3
-  wanderRadius: 1
-  eyesPerceptRadious: 6
-  earsPerceptRadious: 10
-  eyesPercept: {fileID: 816716617}
-  earsPercept: {fileID: 1586216509}
-  animator: {fileID: 1888795305}
-  agentState: 0
---- !u!114 &1888795307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888795304}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a765e2ed7285d48be8d94cb490581406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  maxVel: 2
-  maxSteerForce: 1.7
-  slowingRadius: 2
-  stopThreshold: 1.7
-  wanderDisplacement: 3
-  wanderRadius: 1
-  eyesPerceptRadious: 6
-  earsPerceptRadious: 10
-  eyesPercept: {fileID: 816716617}
-  earsPercept: {fileID: 1586216509}
-  animator: {fileID: 1888795305}
-  agentState: 0
 --- !u!54 &1888795308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46131,7 +46110,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 2
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
